@@ -280,8 +280,8 @@ async def health_check():
 @app.get("/show/{unique_id}", response_class=HTMLResponse)
 async def show_page(request: Request, unique_id: str):
     return templates.TemplateResponse(
-    "show.html",
-    {"request": request, "file_id": file_id, "url": video_url}
+    "show.html", 
+    {"request": request, "file_id": FileId, "url": video_url} 
 )
 
 @app.get("/api/file/{unique_id}", response_class=JSONResponse)
