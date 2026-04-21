@@ -278,20 +278,14 @@ async def health_check():
     return {"status": "ok", "message": "Server is healthy and running!"}
 
 @app.get("/show/{unique_id}", response_class=HTMLResponse)
-async def show_page(request: Request, unique_id: str):
-    video_url = f"{request.base_url}stream/{unique_id}"
-    
-    return templates.TemplateResponse(
-        "show.html", 
-        context={  # <--- ဒီမှာ 'context=' ဆိုတာလေး ထည့်ပေးပါ
-            "request": request, 
-            "file_id": unique_id, 
-            "url": video_url
-        } 
-    )
-
-
-
+return templates.TemplateResponse(
+    name="show.html",
+    context={
+        "request": request,
+        "file_id": unique_id,
+        "url": video_url
+    }
+)
 @app.get("/api/file/{unique_id}", response_class=JSONResponse)
 async def get_file_details_api(request: Request, unique_id: str):
     message_id = await db.get_link(unique_id)
